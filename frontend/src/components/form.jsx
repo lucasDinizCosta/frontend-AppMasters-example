@@ -6,9 +6,48 @@ import '../App.css'
 
 const renderErrorMessage = (msg) => (<label className="errorNotice">{msg}</label>);
 export default class Formulario extends React.Component{
+
+    state = {
+        name: '',
+        email: '',
+        phone: '', 
+        addressZip: '', // CEP
+        addressStreet: '', // logradouro
+        addressNumber: '',
+        addressComplement: '',
+        addressDistrict: '',    // bairro
+        addressCity: '',
+        addressState: '',
+    };
+    self = this;
+
     onSubmit(values, actions){
         console.log('SUBMIT', values);
     }
+
+    onBlurCep(ev, setFieldValueAux){
+        const {value} = ev.target;
+        const setFieldValue = setFieldValueAux;  // Ajusta a referencia pra função
+        
+        // Trabalhando com REGEX pra ajustar o CEP
+        // /[^0-9]/g pega tudo que nao for numero
+        const cep = value?.replace(/[^0-9]/g, '');
+    
+        if(cep?.length !== 8){  // '?' verifica se existe, então tenta acessar o length
+          return;
+        }
+    
+        //Extrai o json com os dados do CEP
+        let test = fetch(`https://viacep.com.br/ws/${cep}/json/`)
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            setFieldValue('addressStreet', data.logradouro);
+            setFieldValue('addressDistrict', data.bairro);
+            setFieldValue('addressCity', data.localidade);
+            setFieldValue('addressState', data.uf);
+          });
+      }
 
     render(){
         return(
@@ -16,20 +55,12 @@ export default class Formulario extends React.Component{
             validationSchema={schema}
             onSubmit={this.onSubmit}
             validateOnMount
-            initialValues={{
-                name: '',
-                email: '',
-                phone: '', 
-                addressZip: '', // CEP
-                addressStreet: '', // logradouro
-                addressNumber: '',
-                addressComplement: '',
-                addressDistrict: '',    // bairro
-                addressCity: '',
-                addressState: '',
-            }}>
-            {(values, errors, touched, isValid) => (
+            initialValues={this.state}>
+            {({isValid, setFieldValue}) => (
                 <Form className="form-controller">
+                    <div className="field-controller">
+                        <label>Formulário de cadastro para recebimento dos adesivos</label>
+                    </div>
                     <div className="field-controller">
                         <label>Nome: 
                             <ErrorMessage render={renderErrorMessage} name="name"/>
@@ -48,7 +79,9 @@ export default class Formulario extends React.Component{
                     </div>
                     <div className="field-controller">
                         <label>CEP: </label>
-                        <Field name="addressZip" type="text"/>
+                        <Field name="addressZip" type="text" onBlur={
+                            (ev) => this.onBlurCep(ev, setFieldValue)
+                        }/>
                     </div>
                     <div className="field-controller">
                         <label>Logradouro: </label>
