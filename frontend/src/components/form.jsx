@@ -1,11 +1,21 @@
 import React from 'react';
-import {Formik, Form, Field} from 'formik';
+import {Formik, Form, Field, ErrorMessage} from 'formik';
 import StateList from './StateList';
+import schema from './schema'
+import '../App.css'
 
+const renderErrorMessage = (msg) => (<label className="errorNotice">{msg}</label>);
 export default class Formulario extends React.Component{
+    onSubmit(values, actions){
+        console.log('SUBMIT', values);
+    }
+
     render(){
         return(
             <Formik
+            validationSchema={schema}
+            onSubmit={this.onSubmit}
+            validateOnMount
             initialValues={{
                 name: '',
                 email: '',
@@ -18,14 +28,18 @@ export default class Formulario extends React.Component{
                 addressCity: '',
                 addressState: '',
             }}>
-            {(isValid) => (
+            {(values, errors, touched, isValid) => (
                 <Form className="form-controller">
                     <div className="field-controller">
-                        <label>Nome: </label>
+                        <label>Nome: 
+                            <ErrorMessage render={renderErrorMessage} name="name"/>
+                        </label>
                         <Field name="name" type="text"/>
                     </div>
                     <div className="field-controller">
-                        <label>Email: </label>
+                        <label>Email: 
+                        <ErrorMessage render={renderErrorMessage} name="email"/>
+                        </label>
                         <Field name="email" type="email"/>
                     </div>
                     <div className="field-controller">
@@ -62,10 +76,11 @@ export default class Formulario extends React.Component{
                             <StateList />
                         </Field>
                     </div>
-                    <button type="submit" disabled={!isValid}>Enviar</button>
+                    <button type="submit" /*disabled={!isValid}*/>Enviar</button>
                 </Form>
             )}   
             </Formik>
         )
     }
+    
 }

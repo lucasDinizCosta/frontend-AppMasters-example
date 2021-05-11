@@ -32,3 +32,6 @@ body {
 .button:active{
   background-color: #ccc;
 }
+.errorNotice {
+  color: red;
+}
