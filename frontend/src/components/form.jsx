@@ -1,5 +1,6 @@
 import React from 'react';
-import {Formik, Form, Field} from 'formik'
+import {Formik, Form, Field} from 'formik';
+import StateList from './StateList';
 
 export default class Formulario extends React.Component{
     render(){
@@ -57,7 +58,9 @@ export default class Formulario extends React.Component{
                     </div>
                     <div className="form-controller">
                         <label>Estado: </label>
-                        <Field name="addressState" type="text"/>
+                        <Field component="select" name="addressState">
+                            <StateList />
+                        </Field>
                     </div>
                 </Form>
             )}   
