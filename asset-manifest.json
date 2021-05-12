@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/frontend-AppMasters-example/static/css/main.643c9c5f.chunk.css",
+    "main.js": "/frontend-AppMasters-example/static/js/main.019b81d1.chunk.js",
+    "main.js.map": "/frontend-AppMasters-example/static/js/main.019b81d1.chunk.js.map",
+    "runtime-main.js": "/frontend-AppMasters-example/static/js/runtime-main.f28d84e3.js",
+    "runtime-main.js.map": "/frontend-AppMasters-example/static/js/runtime-main.f28d84e3.js.map",
+    "static/js/2.314227c1.chunk.js": "/frontend-AppMasters-example/static/js/2.314227c1.chunk.js",
+    "static/js/2.314227c1.chunk.js.map": "/frontend-AppMasters-example/static/js/2.314227c1.chunk.js.map",
+    "static/js/3.486e8c6c.chunk.js": "/frontend-AppMasters-example/static/js/3.486e8c6c.chunk.js",
+    "static/js/3.486e8c6c.chunk.js.map": "/frontend-AppMasters-example/static/js/3.486e8c6c.chunk.js.map",
+    "index.html": "/frontend-AppMasters-example/index.html",
+    "static/css/main.643c9c5f.chunk.css.map": "/frontend-AppMasters-example/static/css/main.643c9c5f.chunk.css.map",
+    "static/js/2.314227c1.chunk.js.LICENSE.txt": "/frontend-AppMasters-example/static/js/2.314227c1.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f28d84e3.js",
+    "static/js/2.314227c1.chunk.js",
+    "static/css/main.643c9c5f.chunk.css",
+    "static/js/main.019b81d1.chunk.js"
+  ]
+}
